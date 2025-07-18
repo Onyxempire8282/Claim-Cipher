@@ -1,0 +1,84 @@
+/* === Base Reset & Body === */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === Sidebar Container === */
+.sidebar {
+  width: 80px;
+  height: 100%;
+  background: rgba(0, 12, 31, 0.75);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* push icons to the bottom */
+  padding: 2rem 0;
+}
+
+.sidebar:hover {
+  width: 220px;
+}
+
+/* === Menu Content === */
+.menu-content {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 2rem 0; /* space from bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-content li {
+  margin: 1rem 0;
+}
+
+.menu-content li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* circular */
+  text-decoration: none;
+  color: #f0f0f0;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.3),
+              inset -4px -4px 8px rgba(255,255,255,0.1);
+  transition: all 1s ease;
+}
+
+.menu-content li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.4),
+              inset -2px -2px 5px rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+.menu-content li a span:nth-child(2) {
+  display: none;
+  margin-left: 12px;
+}
+
+.menu-item .menu-content li a {
+  /* keep existing styles */
+}
+
+.menu-item:hover a,
+.menu-item:focus-within a {
+  border-radius: 12px;
+  width: auto;
+  padding: 12px 20px;
+}
+
+.menu-item:hover a span:nth-child(2),
+.menu-item:focus-within a span:nth-child(2) {
+  display: inline-block;
+}

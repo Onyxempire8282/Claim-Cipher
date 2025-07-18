@@ -1,0 +1,74 @@
+.claim-cipher__main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+.claim-cipher__calculator {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  padding: 2.5rem 2rem;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.claim-cipher__calculator h2 {
+  margin-top: 0;
+  color: #f8f8f8;
+  font-weight: 600;
+}
+
+.claim-cipher__label {
+  color: #ddd;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.claim-cipher__input {
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8f8f8;
+}
+
+.claim-cipher__button {
+  background: #203a43;
+  color: #f8f8f8;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.claim-cipher__button:hover {
+  background: #2c5364;
+  transform: translateY(-2px);
+}
+
+.claim-cipher__result {
+  margin-top: 1rem;
+  background: rgba(0,0,0,0.2);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #f8f8f8;
+  text-align: center;
+}
+
+
+  .calculator-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* start and push down with padding */
+  align-items: center;
+  padding-top: 8rem; /* adjust for how low you want it */
+}

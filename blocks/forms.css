@@ -1,0 +1,20 @@
+./* ===============================
+   Shared Form Elements
+================================= */
+
+input[type="text"],
+input[type="number"],
+select {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+button {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}

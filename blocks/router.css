@@ -1,0 +1,108 @@
+/* === Route Optimizer Card === */
+.claim-cipher__route-optimizer {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 4rem auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  color: #f0f0f0;
+}
+
+/* === Layout === */
+.claim-cipher__route-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.claim-cipher__route-inputs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.claim-cipher__route-inputs input,
+.claim-cipher__route-inputs label {
+  font-size: 1rem;
+  color: #f0f0f0;
+}
+
+.claim-cipher__route-inputs input {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #f0f0f0;
+}
+
+.claim-cipher__route-inputs button {
+  background: #203a43;
+  border: none;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.claim-cipher__route-inputs button:hover {
+  background: #2c5364;
+}
+
+.claim-cipher__route-map {
+  flex: 2;
+  min-width: 400px;
+}
+
+.claim-cipher__map {
+  width: 100%;
+  height: 500px; /* 📌 make bigger! */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* === Results Table === */
+#routeResults table {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  color: #f8f8f8;
+  margin-top: 1rem;
+}
+
+#routeResults table th, #routeResults table td {
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* === Schedule Modal === */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 999; 
+  padding-top: 100px; 
+  left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: rgba(32, 58, 67, 0.9);
+  backdrop-filter: blur(20px);
+  margin: auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 70%;
+  color: #f8f8f8;
+}
+
+.close-button {
+  float: right;
+  font-size: 2rem;
+  cursor: pointer;
+}

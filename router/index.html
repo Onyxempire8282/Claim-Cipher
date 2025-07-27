@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claim Cipher</title>
+    <meta name="description" content="Billing Calculator and Route Optimizer" />
+    <meta
+      name="keywords"
+      content="claim cipher, claim, cipher, adjuster, billing, calculator, route optimizer, mileage, distance, Google Maps API"
+    />
+    <meta name="author" content="Vernon Long" />
+    <link rel="stylesheet" href="../vendor/normalize.css" />
+    <link rel="stylesheet" href="../vendor/leaflet.css" />
+    <link rel="stylesheet" href="../pages/index.css" />
+    <link rel="stylesheet" href="../pages/print.css" media="print" />
+    <link rel="stylesheet" href="../pages/schedule.css" />
+    <link rel="stylesheet" href="../blocks/sidebar.css">
+    <link rel="stylesheet" href="../blocks/router.css">
+
+
+
+    
+  </head>
+  <body class="claim-cipher">
+    
+       <div class="sidebar">
+    <ul class="menu-content">
+
+     <a href="../index.html">
+      <li>
+        <span>🏠</span> <span>Home</span>
+      </a>
+    </li>
+    <li>
+      <a href="../mileage/index.html">
+        <span>📏</span> <span>Mileage</span>
+      </a>
+    </li>
+      <li><a href="../router/index.html"><span>🗺️</span> <span>Router</span></a></li>
+      <li><a href="../total/index.html"><span>📑</span> <span>Total Loss</span></a></li>
+      <li><a href="../about/index.html"><span>ℹ️</span> <span>About</span></a></li>
+    </ul>
+      </div>
+    </header>
+    <main class="claim-cipher__main">
+      <div class="claim-cipher__content">
+       
+        
+        <section class="claim-cipher__route-optimizer">
+          <h2 class="claim-cipher__heading">Route Optimizer</h2>
+          <div class="claim-cipher__route-layout">
+            <div class="claim-cipher__route-inputs">
+              <label for="origin" class="claim-cipher__label"
+                >Starting Address:</label
+              >
+              <input
+                type="text"
+                id="origin"
+                class="claim-cipher__input"
+                placeholder="Your home address"
+              />
+              <label class="claim-cipher__label">Stops (up to 10):</label>
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 1"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 2"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 3"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 4"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 5"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 6"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 7"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 8"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 9"
+              />
+              <input
+                type="text"
+                class="claim-cipher__input claim-cipher__stop"
+                placeholder="Stop 10"
+              />
+              <button class="claim-cipher__button" onclick="optimizeRoute()">
+                Optimize Route
+              </button>
+            </div>
+            <div class="claim-cipher__route-map">
+              <div id="map" class="claim-cipher__map"></div>
+              <div id="routeResults" class="claim-cipher__results"></div>
+            </div>
+            <!-- 🗂️ Schedule Modal -->
+<div id="scheduleModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close-button">&times;</span>
+    <h3>Build Your Weekly Schedule</h3>
+    <p style="color:#f8f8f8;">(Dynamic builder will go here!)</p>
+  </div>
+</div>
+
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="../router/schedule.js"></script>
+  <script src="../router/router.js"></script>
+    <script src="script.js"></script>
+    <script src="utils.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR51CGOXEyVz8Dy-6hU7kdaqbq8-CTkBs&libraries=places&callback=initServices" async defer></script>
+    
+  </body>
+</html>

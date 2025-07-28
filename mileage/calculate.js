@@ -76,7 +76,11 @@ function calculateBilling() {
       freeMiles = 60; rate = 0.67; break;
     // Add more cases as needed
   }
-
+const billable = Math.max(0, miles - freeMiles);
+  const cost = billable * rate;
+  document.getElementById("billingResult").textContent =
+    `(${miles} RT - ${freeMiles} Free) = ${billable} mi x $${rate} = $${cost.toFixed(2)}`;
+}
   function copyResult() {
   const result = document.getElementById("billingResult").textContent;
   if (!result) {
@@ -87,8 +91,4 @@ function calculateBilling() {
     .then(() => alert("Result copied!"))
     .catch(() => alert("Copy failed!"));
 }
-  const billable = Math.max(0, miles - freeMiles);
-  const cost = billable * rate;
-  document.getElementById("billingResult").textContent =
-    `(${miles} RT - ${freeMiles} Free) = ${billable} mi x $${rate} = $${cost.toFixed(2)}`;
-}
+  

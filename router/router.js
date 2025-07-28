@@ -60,96 +60,58 @@ function optimizeRoute() {
         routeResults.innerHTML = "";
 
         route.legs.forEach((leg, i) => {
+          const stop = leg.end_address;
           const segment = document.createElement("div");
           segment.classList.add("route-segment");
+
           segment.innerHTML = `
             <p><strong>From:</strong> ${leg.start_address}</p>
             <p><strong>To:</strong> ${leg.end_address}</p>
             <p><strong>Distance:</strong> ${leg.distance.text} | <strong>Time:</strong> ${leg.duration.text}</p>
           `;
-          summaryPanel.appendChild(segment);
-        });
 
-        const orderedStops = route.legs.map(leg => leg.end_address);
-        orderedStops.forEach((stop, index) => {
-          addScheduleTable(stop, index + 1);
+          // Add time picker
+          const timeField = document.createElement("input");
+          timeField.type = "datetime-local";
+          timeField.classList.add("appointment-time");
+          timeField.style.marginTop = "1rem";
+          segment.appendChild(timeField);
+
+          // Add container for calendar links
+          const calendarContainer = document.createElement("div");
+          calendarContainer.classList.add("calendar-links");
+          segment.appendChild(calendarContainer);
+
+          // Build calendar links on change
+          timeField.addEventListener("change", () => {
+            const selectedTime = new Date(timeField.value);
+            const endTime = new Date(selectedTime.getTime() + 60 * 60 * 1000);
+
+            const gcalLink = createGoogleCalendarLink({
+              title: "Claim Appointment",
+              location: stop,
+              description: "Scheduled site inspection.",
+              startDateTime: selectedTime,
+              endDateTime: endTime
+            });
+
+            const icsLink = createICSFile({
+              title: "Claim Appointment",
+              location: stop,
+              description: "Scheduled site inspection.",
+              startDateTime: selectedTime,
+              endDateTime: endTime
+            });
+
+            calendarContainer.innerHTML = `
+              <a href="${gcalLink}" target="_blank">📅 Add to Google Calendar</a>
+              <a href="${icsLink}" download="appointment.ics">🗓️ Outlook/Apple</a>
+            `;
+          });
+
+          summaryPanel.appendChild(segment);
         });
       }
     );
   });
-}
-
-function addScheduleTable(stop, index) {
-  const scheduleCard = document.createElement("div");
-  scheduleCard.classList.add("schedule-card");
-
-  const header = document.createElement("h4");
-  header.textContent = `Stop #${index}: ${stop}`;
-  scheduleCard.appendChild(header);
-
-  const timeField = document.createElement("input");
-  timeField.type = "datetime-local";
-  timeField.classList.add("appointment-time");
-  scheduleCard.appendChild(timeField);
-
-  timeField.addEventListener("change", () => {
-    const selectedTime = new Date(timeField.value);
-    const endTime = new Date(selectedTime.getTime() + 60 * 60 * 1000); // +1 hr
-
-    const oldLinks = scheduleCard.querySelector(".calendar-links");
-    if (oldLinks) oldLinks.remove();
-
-    const gcalLink = createGoogleCalendarLink({
-      title: "Claim Appointment",
-      location: stop,
-      description: "Scheduled site inspection.",
-      startDateTime: selectedTime,
-      endDateTime: endTime
-    });
-
-    const icsLink = createICSFile({
-      title: "Claim Appointment",
-      location: stop,
-      description: "Scheduled site inspection.",
-      startDateTime: selectedTime,
-      endDateTime: endTime
-    });
-
-    const calendarBtns = document.createElement("div");
-    calendarBtns.classList.add("calendar-links");
-    calendarBtns.innerHTML = `
-      <a href="${gcalLink}" target="_blank">📅 Add to Google Calendar</a>
-      <a href="${icsLink}" download="appointment.ics">🗓️ Download Outlook/Apple Calendar File</a>
-    `;
-
-    scheduleCard.appendChild(calendarBtns);
-  });
-
-  document.getElementById("routeResults").appendChild(scheduleCard);
-}
-
-function createGoogleCalendarLink({ title, location, description, startDateTime, endDateTime }) {
-  const formatDate = dt => encodeURIComponent(dt.toISOString().replace(/-|:|\.\d\d\d/g, ""));
-  const start = formatDate(startDateTime);
-  const end = formatDate(endDateTime);
-
-  return `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
-}
-
-function createICSFile({ title, location, description, startDateTime, endDateTime }) {
-  const format = dt => dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-  const content = `
-BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-SUMMARY:${title}
-DTSTART:${format(startDateTime)}
-DTEND:${format(endDateTime)}
-LOCATION:${location}
-DESCRIPTION:${description}
-END:VEVENT
-END:VCALENDAR`;
-
-  const blob = new Blob([content.trim()], { type: 'text/calendar;charset=utf-8' });
-  return URL.createObjectURL(blob);
 }

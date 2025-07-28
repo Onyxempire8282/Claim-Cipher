@@ -136,8 +136,8 @@
 
 .route-segment {
   padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
 }
 
 #routeSummary {
@@ -220,10 +220,13 @@
     text-align: center;
   }
 
-  .appointment-time {
-    width: 100% !important;
-    margin: 1rem 0;
-  }
+.appointment-time {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
 
   .modal-content {
     width: 90%;

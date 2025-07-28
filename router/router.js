@@ -16,6 +16,7 @@ function initServices() {
 window.initServices = initServices;
 
 function optimizeRoute() {
+  console.log("Optimize Route clicked!");
   const origin = document.getElementById("origin").value.trim();
   const stops = Array.from(document.querySelectorAll(".claim-cipher__stop"))
     .map(input => input.value.trim()).filter(Boolean);
@@ -45,16 +46,17 @@ function optimizeRoute() {
         destination: origin,
         waypoints,
         optimizeWaypoints: true,
-        travelMode: "DRIVING",
+        travelMode: "DRIVING"
       },
       (res, status) => {
         if (status !== "OK") return alert("Route error: " + status);
         directionsRenderer.setDirections(res);
 
         const route = res.routes[0];
-        const routeResults = document.getElementById("routeResults");
         const summaryPanel = document.getElementById("routeSummary");
         summaryPanel.innerHTML = "<h3>Route Summary:</h3>";
+
+        const routeResults = document.getElementById("routeResults");
         routeResults.innerHTML = "";
 
         route.legs.forEach((leg, i) => {
@@ -68,29 +70,31 @@ function optimizeRoute() {
           summaryPanel.appendChild(segment);
         });
 
-        const orderedStops = route.legs.map((leg) => leg.end_address);
+        const orderedStops = route.legs.map(leg => leg.end_address);
         orderedStops.forEach((stop, index) => {
-          addScheduleCard(stop, index + 1);
+          addScheduleTable(stop, index + 1);
         });
       }
     );
   });
 }
 
-function addScheduleCard(stop, index) {
+function addScheduleTable(stop, index) {
   const scheduleCard = document.createElement("div");
   scheduleCard.classList.add("schedule-card");
 
   const header = document.createElement("h4");
   header.textContent = `Stop #${index}: ${stop}`;
+  scheduleCard.appendChild(header);
 
   const timeField = document.createElement("input");
   timeField.type = "datetime-local";
-  timeField.className = "appointment-time";
+  timeField.classList.add("appointment-time");
+  scheduleCard.appendChild(timeField);
 
   timeField.addEventListener("change", () => {
     const selectedTime = new Date(timeField.value);
-    const endTime = new Date(selectedTime.getTime() + 60 * 60 * 1000);
+    const endTime = new Date(selectedTime.getTime() + 60 * 60 * 1000); // +1 hr
 
     const oldLinks = scheduleCard.querySelector(".calendar-links");
     if (oldLinks) oldLinks.remove();
@@ -100,7 +104,7 @@ function addScheduleCard(stop, index) {
       location: stop,
       description: "Scheduled site inspection.",
       startDateTime: selectedTime,
-      endDateTime: endTime,
+      endDateTime: endTime
     });
 
     const icsLink = createICSFile({
@@ -108,7 +112,7 @@ function addScheduleCard(stop, index) {
       location: stop,
       description: "Scheduled site inspection.",
       startDateTime: selectedTime,
-      endDateTime: endTime,
+      endDateTime: endTime
     });
 
     const calendarBtns = document.createElement("div");
@@ -121,8 +125,6 @@ function addScheduleCard(stop, index) {
     scheduleCard.appendChild(calendarBtns);
   });
 
-  scheduleCard.appendChild(header);
-  scheduleCard.appendChild(timeField);
   document.getElementById("routeResults").appendChild(scheduleCard);
 }
 
@@ -136,17 +138,30 @@ function createGoogleCalendarLink({ title, location, description, startDateTime,
 
 function createICSFile({ title, location, description, startDateTime, endDateTime }) {
   const format = dt => dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+  const uid = `claim-${Date.now()}@claimcipher.com`; // unique ID per invite
+
   const content = `
 BEGIN:VCALENDAR
 VERSION:2.0
+PRODID:-//Claim Cipher//Route Optimizer 1.0//EN
+CALSCALE:GREGORIAN
+METHOD:REQUEST
 BEGIN:VEVENT
+UID:${uid}
 SUMMARY:${title}
+DESCRIPTION:${description}
+LOCATION:${location}
 DTSTART:${format(startDateTime)}
 DTEND:${format(endDateTime)}
-LOCATION:${location}
-DESCRIPTION:${description}
+STATUS:CONFIRMED
+SEQUENCE:0
+TRANSP:OPAQUE
+ORGANIZER;CN=Claim Cipher:mailto:vernon@claimcipher.com
+ATTENDEE;CN=Client:mailto:client@email.com
 END:VEVENT
-END:VCALENDAR`;
+END:VCALENDAR
+`;
 
   const blob = new Blob([content.trim()], { type: 'text/calendar;charset=utf-8' });
   return URL.createObjectURL(blob);

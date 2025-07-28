@@ -188,3 +188,65 @@
 }
 
 
+/* Keep everything above as-is — now here’s the new responsive section */
+
+@media (max-width: 1024px) {
+  .claim-cipher__route-layout {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .claim-cipher__route-map,
+  .claim-cipher__route-inputs {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .claim-cipher__map {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .claim-cipher__route-inputs input,
+  .claim-cipher__route-inputs button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .calendar-links a {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .appointment-time {
+    width: 100% !important;
+    margin: 1rem 0;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .claim-cipher__page-header {
+    font-size: 1.75rem;
+    padding: 1rem 0;
+  }
+
+  .claim-cipher__section-title {
+    font-size: 1.25rem;
+  }
+
+  .claim-cipher__map {
+    height: 300px;
+  }
+
+  .calendar-links a {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}

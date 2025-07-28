@@ -138,30 +138,17 @@ function createGoogleCalendarLink({ title, location, description, startDateTime,
 
 function createICSFile({ title, location, description, startDateTime, endDateTime }) {
   const format = dt => dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-
-  const uid = `claim-${Date.now()}@claimcipher.com`; // unique ID per invite
-
   const content = `
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Claim Cipher//Route Optimizer 1.0//EN
-CALSCALE:GREGORIAN
-METHOD:REQUEST
 BEGIN:VEVENT
-UID:${uid}
 SUMMARY:${title}
-DESCRIPTION:${description}
-LOCATION:${location}
 DTSTART:${format(startDateTime)}
 DTEND:${format(endDateTime)}
-STATUS:CONFIRMED
-SEQUENCE:0
-TRANSP:OPAQUE
-ORGANIZER;CN=Claim Cipher:mailto:vernon@claimcipher.com
-ATTENDEE;CN=Client:mailto:client@email.com
+LOCATION:${location}
+DESCRIPTION:${description}
 END:VEVENT
-END:VCALENDAR
-`;
+END:VCALENDAR`;
 
   const blob = new Blob([content.trim()], { type: 'text/calendar;charset=utf-8' });
   return URL.createObjectURL(blob);

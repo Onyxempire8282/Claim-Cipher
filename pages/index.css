@@ -5,3 +5,7 @@
 @import url("../router/index.html");
 @import url("../total-loss/index.html");
 @import url("../about/index.html");
+@import url("../blocks/router.css");
+@import url("../blocks/calculator.css");
+@import url("../blocks/cipher.css");
+

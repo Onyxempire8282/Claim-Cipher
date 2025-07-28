@@ -1,0 +1,100 @@
+.claim-cipher__main {
+  flex-grow: 1;
+  padding: 0;
+  width: calc(100% - 80px);
+  overflow-y: auto;
+}
+
+/* Content container used on home, about and total pages */
+.claim-cipher__content {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  color: #f8f8f8;
+}
+
+/* Headings for content pages */
+.claim-cipher__heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #90caf9;
+}
+
+.claim-cipher__subheading {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: #90caf9;
+}
+
+.claim-cipher__features {
+  list-style: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 0;
+}
+
+/* Utility classes for form elements */
+.claim-cipher__label {
+  color: #ddd;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.claim-cipher__input {
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8f8f8;
+}
+
+.claim-cipher__button {
+  background: #203a43;
+  color: #f8f8f8;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.claim-cipher__button:hover {
+  background: #2c5364;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .claim-cipher__page-header {
+    font-size: 2rem;
+  }
+
+  .sidebar:hover {
+    width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 60px;
+  }
+  .sidebar:hover {
+    width: 60px;
+  }
+  .claim-cipher__main {
+    width: calc(100% - 60px);
+  }
+  .claim-cipher__heading {
+    font-size: 1.5rem;
+  }
+  .claim-cipher__subheading {
+    font-size: 1.25rem;
+  }
+  .claim-cipher__content {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}

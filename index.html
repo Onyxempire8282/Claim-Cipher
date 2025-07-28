@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Claim Cipher</title>
-    <meta name="description" content="Billing Calculator and Route Optimizer" />
-    <meta
-      name="keywords"
-      content="claim cipher, claim, cipher, adjuster, billing, calculator, route optimizer, mileage, distance, Google Maps API"
-    />
-    <meta name="author" content="Vernon Long" />
-    <link rel="stylesheet" href="vendor/normalize.css" />
-    <link rel="stylesheet" href="vendor/leaflet.css" />
-    <link rel="stylesheet" href="pages/index.css" />
-    <link rel="stylesheet" href="pages/print.css" media="print" />
-    <link rel="stylesheet" href="pages/schedule.css" />
-    <link rel="stylesheet" href="blocks/sidebar.css" />
-    <link rel="stylesheet" href="blocks/router.css" />
-
-
-
-    
-  </head>
-  <body class="claim-cipher">
-    
-       <div class="sidebar">
+<head>
+  <meta charset="UTF‑8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claim Cipher</title>
+  <meta name="description" content="Insurance billing calculator and route optimizer">
+  <meta name="keywords" content="claim cipher, insurance adjuster, billing calculator, route optimizer, mileage">
+  <meta name="author" content="Vernon Long">
+  <!-- Vendor & Base Styles -->
+  <link rel="stylesheet" href="vendor/normalize.css">
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="blocks/sidebar.css">
+  <link rel="stylesheet" href="blocks/header.css">
+  <link rel="stylesheet" href="blocks/router.css">
+  <link rel="stylesheet" href="blocks/calculator.css">
+  <!-- Page Styles -->
+  <link rel="stylesheet" href="pages/index.css">
+  <link rel="stylesheet" href="pages/print.css" media="print">
+  <link rel="stylesheet" href="pages/schedule.css">
+</head>
+<body class="claim-cipher">
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
     <ul class="menu-content">
-
-     <a href="index.html">
-      <li>
-        <span>🏠</span> <span>Home</span>
-      </a>
-    </li>
-    <li>
-      <a href="mileage/index.html">
-        <span>📏</span> <span>Mileage</span>
-      </a>
-    </li>
-      <li><a href="router/index.html"><span>🗺️</span> <span>Router</span></a></li>
-      <li><a href="total/index.html"><span>📑</span> <span>Total Loss</span></a></li>
-      <li><a href="about/index.html"><span>ℹ️</span> <span>About</span></a></li>
+      <li><a href="index.html"><span>🏠</span><span>Home</span></a></li>
+      <li><a href="mileage/index.html"><span>📏</span><span>Mileage</span></a></li>
+      <li><a href="router/index.html"><span>🗺️</span><span>Router</span></a></li>
+      <li><a href="total/index.html"><span>📑</span><span>Total Loss</span></a></li>
+      <li><a href="about/index.html"><span>ℹ️</span><span>About</span></a></li>
     </ul>
-      </div>
-    </header>
-    <main class="claim-cipher__main">
-     <!-- Trigger build -->
+  </div>
 
-    </main>
-   
-    <script src="script.js"></script>
-    <script src="utils.js"></script>
-   
-    
-  </body>
+  <main class="claim-cipher__main">
+    <header class="claim-cipher__page-header">
+      <h1>Claim Cipher</h1>
+    </header>
+    <section class="claim-cipher__content">
+      <h2 class="claim-cipher__heading">Your Adjusting Toolkit</h2>
+      <p>
+        Claim Cipher is a comprehensive tool built for insurance adjusters. Quickly calculate reimbursable mileage, optimize complex routes, and access all of your adjusting tools in one place. Use the navigation on the left to get started.
+      </p>
+      <h3 class="claim-cipher__subheading">Features</h3>
+      <ul class="claim-cipher__features">
+        <li>Mileage calculator with firm‑specific billing rules</li>
+        <li>Route optimizer that supports up to 10 stops</li>
+        <li>Total loss estimator (coming soon)</li>
+        <li>Responsive design tailored for desktop, tablet and mobile</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="utils.js"></script>
+</body>
 </html>

@@ -1,21 +1,20 @@
 /*
- * Styles for the Total Loss Estimator page in Claim Cipher.
+ * Claim Cipher – Total Loss Estimator styles
  *
- * This stylesheet follows the BEM methodology used throughout the Claim Cipher
- * application.  The block is ``claim-cipher__total-loss``, and elements
- * such as ``-step`` or ``-button`` describe the individual parts of the
- * user interface.  Colours and effects mirror the dark, glassy aesthetic
- * of the existing tools.
+ * This stylesheet defines styles for the `claim-cipher__total-loss` block
+ * and its elements.  It follows the BEM naming convention used in the
+ * existing application.  Colours and effects mirror the dark, glassy
+ * aesthetic seen on other pages such as the route optimizer.
  */
 
-/* Container for all total loss components */
+/* Container for all total-loss steps */
 .claim-cipher__total-loss {
   padding: 2rem;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* Each step of the workflow */
+/* Generic card container for each step */
 .claim-cipher__total-loss-step {
   background: rgba(32, 58, 67, 0.9);
   backdrop-filter: blur(20px);
@@ -26,35 +25,35 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Headings for each step */
+/* Step headings */
 .claim-cipher__total-loss-heading {
   margin-top: 0;
   font-size: 1.3rem;
   color: #90caf9;
 }
 
-/* Descriptive text below headings */
+/* Descriptive text beneath headings */
 .claim-cipher__total-loss-description {
   font-size: 0.9rem;
   margin-bottom: 1rem;
   color: #cfd8dc;
 }
 
-/* Generic form grouping */
+/* Form grouping */
 .claim-cipher__total-loss-form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 0.75rem;
 }
 
-/* Label styling */
+/* Labels */
 .claim-cipher__total-loss-label {
   font-weight: 600;
   margin-bottom: 0.25rem;
   color: #90caf9;
 }
 
-/* Inputs and textareas share similar styling */
+/* Inputs and textareas */
 .claim-cipher__total-loss-input,
 .claim-cipher__total-loss-textarea {
   padding: 0.5rem;
@@ -69,14 +68,14 @@
   resize: vertical;
 }
 
-/* Row grouping for multiple small inputs */
+/* Row grouping for multiple inline form groups */
 .claim-cipher__total-loss-form-row {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
-/* Primary buttons used throughout the workflow */
+/* Primary buttons */
 .claim-cipher__total-loss-button {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -100,19 +99,19 @@
   background-color: #2c5364;
 }
 
-/* Status messages for parsing feedback */
+/* Status messages */
 .claim-cipher__total-loss-status {
   margin-top: 0.5rem;
   font-size: 0.85rem;
   color: #90a4ae;
 }
 
-/* Details area after VIN decode */
+/* VIN decode details area */
 .claim-cipher__total-loss-details {
   margin: 0.5rem 0;
 }
 
-/* Table for salvage bids */
+/* Table styling for salvage bids */
 .claim-cipher__total-loss-table {
   width: 100%;
   border-collapse: collapse;
@@ -127,7 +126,7 @@
   text-align: left;
 }
 
-/* Summary text container */
+/* Summary container */
 .claim-cipher__total-loss-summary {
   margin-top: 0.75rem;
   padding: 0.5rem;
@@ -139,14 +138,14 @@
   color: #ffffff;
 }
 
-/* Checkbox label styling */
+/* Checkbox labels */
 .claim-cipher__total-loss-checkbox-label {
   display: block;
   margin-top: 0.75rem;
   color: #f0f0f0;
 }
 
-/* Container for the PDF/Text buttons */
+/* Button group for summary actions */
 .claim-cipher__total-loss-button-group {
   margin-top: 0.75rem;
   display: flex;

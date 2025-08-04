@@ -35,7 +35,8 @@
   padding: 0.8rem 1rem;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.1);
-  color: #f8f8f8;
+  color: #111;
+  background-color: #f8f8f8;
 }
 
 .claim-cipher__button {

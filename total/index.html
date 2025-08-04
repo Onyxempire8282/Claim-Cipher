@@ -1,46 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF‑8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claim Cipher | Total Loss Estimator</title>
-  <meta name="description" content="Total loss estimator for Claim Cipher">
-  <meta name="author" content="Vernon Long">
-  <!-- Vendor & Base Styles -->
-  <link rel="stylesheet" href="../vendor/normalize.css">
-  <link rel="stylesheet" href "../vendor/leaflet.css">
-  <!-- Component Styles -->
-  <link rel="stylesheet" href="../blocks/sidebar.css">
-  <link rel="stylesheet" href="../blocks/header.css">
-  <link rel="stylesheet" href="../blocks/router.css">
-  <link rel="stylesheet" href="../blocks/calculator.css">
-  <!-- Page Styles -->
-  <link rel="stylesheet" href="../pages/index.css">
-  <link rel="stylesheet" href="../pages/print.css" media="print">
-  <link rel="stylesheet" href="../pages/schedule.css">
-</head>
-<body class="claim-cipher">
-  <div class="sidebar">
-    <ul class="menu-content">
-      <li><a href="../index.html"><span>🏠</span><span>Home</span></a></li>
-      <li><a href="../mileage/index.html"><span>📏</span><span>Mileage</span></a></li>
-      <li><a href="../router/index.html"><span>🗺️</span><span>Router</span></a></li>
-      <li><a href="../total/index.html"><span>📑</span><span>Total Loss</span></a></li>
-      <li><a href="../about/index.html"><span>ℹ️</span><span>About</span></a></li>
-    </ul>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Claim Cipher | Total Loss Estimator</title>
+    <meta name="description" content="Total loss estimator for Claim Cipher" />
+    <meta name="author" content="Vernon Long" />
+    <!-- Vendor & Base Styles -->
+    <link rel="stylesheet" href="../vendor/normalize.css" />
+    <link rel="stylesheet" href="../vendor/leaflet.css" />
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="../blocks/sidebar.css" />
+    <link rel="stylesheet" href="../blocks/header.css" />
+    <link rel="stylesheet" href="../blocks/router.css" />
+    <link rel="stylesheet" href="../blocks/calculator.css" />
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="../pages/total-loss.css" />
+    <!-- External libraries for PDF parsing/generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.6.172/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body class="claim-cipher">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <ul class="menu-content">
+        <li><a href="../index.html"><span></span><span>Home</span></a></li>
+        <li><a href="../mileage/index.html"><span>📏</span><span>Mileage</span></a></li>
+        <li><a href="../router/index.html"><span>🗺️</span><span>Router</span></a></li>
+        <li><a href="../total/index.html"><span>📑</span><span>Total Loss</span></a></li>
+        <li><a href="../about/index.html"><span>ℹ️</span><span>About</span></a></li>
+      </ul>
+    </div>
+    <main class="claim-cipher__main">
+      <header class="claim-cipher__page-header">
+        <h1>Total Loss Estimator</h1>
+      </header>
+      <section class="claim-cipher__content">
+        <!-- The total-loss block groups all steps together -->
+        <div class="claim-cipher__total-loss">
+          <!-- Step 1: Upload Estimate -->
+          <div class="claim-cipher__total-loss-step claim-cipher__total-loss-step--upload" id="step1">
+            <h3 class="claim-cipher__total-loss-heading">Step 1 – Upload Estimate</h3>
+            <p class="claim-cipher__total-loss-description">
+              Select a CCC ONE estimate (PDF) to begin. The file is parsed locally in your
+              browser; it is never uploaded to a server.
+            </p>
+            <input class="claim-cipher__total-loss-input" type="file" id="estimateInput" accept="application/pdf" />
+            <button class="claim-cipher__total-loss-button" id="parseButton" disabled>Parse Estimate</button>
+            <div class="claim-cipher__total-loss-status" id="parseStatus"></div>
+          </div>
+          <!-- Step 2: BCIF Form -->
+          <div class="claim-cipher__total-loss-step claim-cipher__total-loss-step--bcif" id="step2" hidden>
+            <h3 class="claim-cipher__total-loss-heading">Step 2 – Review & Edit BCIF</h3>
+            <form class="claim-cipher__total-loss-form" id="bcifForm">
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="customerName">Customer Name</label>
+                <input class="claim-cipher__total-loss-input" id="customerName" name="customerName" type="text" />
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="adjusterName">Adjuster Name</label>
+                <input class="claim-cipher__total-loss-input" id="adjusterName" name="adjusterName" type="text" />
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="claimNumber">Claim Number</label>
+                <input class="claim-cipher__total-loss-input" id="claimNumber" name="claimNumber" type="text" />
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="dateOfLoss">Date of Loss</label>
+                <input class="claim-cipher__total-loss-input" id="dateOfLoss" name="dateOfLoss" type="date" />
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="inspectionLocation">Inspection Location</label>
+                <input class="claim-cipher__total-loss-input" id="inspectionLocation" name="inspectionLocation" type="text" />
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="vin">VIN</label>
+                <input class="claim-cipher__total-loss-input" id="vin" name="vin" type="text" pattern="[A-HJ-NPR-Z0-9]{17}" />
+              </div>
+              <div class="claim-cipher__total-loss-form-row">
+                <div class="claim-cipher__total-loss-form-group">
+                  <label class="claim-cipher__total-loss-label" for="year">Year</label>
+                  <input class="claim-cipher__total-loss-input" id="year" name="year" type="number" min="1900" max="2100" />
+                </div>
+                <div class="claim-cipher__total-loss-form-group">
+                  <label class="claim-cipher__total-loss-label" for="make">Make</label>
+                  <input class="claim-cipher__total-loss-input" id="make" name="make" type="text" />
+                </div>
+                <div class="claim-cipher__total-loss-form-group">
+                  <label class="claim-cipher__total-loss-label" for="model">Model</label>
+                  <input class="claim-cipher__total-loss-input" id="model" name="model" type="text" />
+                </div>
+                <div class="claim-cipher__total-loss-form-group">
+                  <label class="claim-cipher__total-loss-label" for="mileage">Mileage</label>
+                  <input class="claim-cipher__total-loss-input" id="mileage" name="mileage" type="number" />
+                </div>
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="damages">Damages / Loss Description</label>
+                <textarea class="claim-cipher__total-loss-textarea" id="damages" name="damages" rows="3"></textarea>
+              </div>
+              <div class="claim-cipher__total-loss-form-group">
+                <label class="claim-cipher__total-loss-label" for="daysToRepair">Estimated Days to Repair</label>
+                <input class="claim-cipher__total-loss-input" id="daysToRepair" name="daysToRepair" type="number" />
+              </div>
+            </form>
+            <button class="claim-cipher__total-loss-button" id="decodeButton">Decode VIN</button>
+          </div>
+          <!-- Step 3: VIN decoding & NADA estimate -->
+          <div class="claim-cipher__total-loss-step claim-cipher__total-loss-step--vin" id="step3" hidden>
+            <h3 class="claim-cipher__total-loss-heading">Step 3 – VIN Decoding & NADA Value</h3>
+            <p class="claim-cipher__total-loss-details" id="vinDetails">
+              <!-- Populated by script.js -->
+            </p>
+            <button class="claim-cipher__total-loss-button" id="salvageButton">Get Salvage Bids</button>
+          </div>
+          <!-- Step 4: Salvage Bids -->
+          <div class="claim-cipher__total-loss-step claim-cipher__total-loss-step--salvage" id="step4" hidden>
+            <h3 class="claim-cipher__total-loss-heading">Step 4 – Salvage Bids</h3>
+            <table class="claim-cipher__total-loss-table" id="salvageTable">
+              <thead>
+                <tr>
+                  <th>Vendor</th>
+                  <th>Estimated Bid</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+            <button class="claim-cipher__total-loss-button" id="summaryButton">Generate Summary</button>
+          </div>
+          <!-- Step 5: Claim summary -->
+          <div class="claim-cipher__total-loss-step claim-cipher__total-loss-step--summary" id="step5" hidden>
+            <h3 class="claim-cipher__total-loss-heading">Step 5 – Claim Summary</h3>
+            <div class="claim-cipher__total-loss-summary" id="summaryContainer">
+              <!-- Summary text will be inserted here -->
+            </div>
+            <label class="claim-cipher__total-loss-checkbox-label">
+              <input class="claim-cipher__total-loss-checkbox" type="checkbox" id="isTotalLoss" />
+              Vehicle is a total loss (uncheck if repairable)
+            </label>
+            <div class="claim-cipher__total-loss-button-group">
+              <button class="claim-cipher__total-loss-button" id="downloadPdfButton">Download PDF</button>
+              <button class="claim-cipher__total-loss-button" id="copyTextButton">Copy Summary Text</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Base scripts for Claim Cipher -->
+    <script src="../script.js"></script>
+    <script src="../utils.js"></script>
+    <script src="script.js"></script>
+  </body>
 
-  <main class="claim-cipher__main">
-    <header class="claim-cipher__page-header">
-      <h1>Total Loss Estimator</h1>
-    </header>
-    <section class="claim-cipher__content">
-      <h2 class="claim-cipher__heading">Coming Soon</h2>
-      <p>We're working hard to bring you a total loss estimator that integrates seamlessly with Claim Cipher.  Check back soon for updates!</p>
-    </section>
-  </main>
-
-  <script src="../script.js"></script>
-  <script src="../utils.js"></script>
-</body>
 </html>

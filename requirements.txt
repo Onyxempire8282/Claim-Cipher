@@ -1,0 +1,7 @@
+
+pdfplumber>=0.9
+pdfrw>=0.4
+requests>=2.31
+# Optional: install one of the following libraries to enable PDF summary generation
+# reportlab>=3.6
+# fpdf2>=2.7

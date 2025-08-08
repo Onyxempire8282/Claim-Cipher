@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claim Cipher</title>
+  <title>Claim Cipher - Route Optimizer</title>
   <meta name="description" content="Billing Calculator and Route Optimizer" />
   <meta name="keywords" content="claim cipher, claim, cipher, adjuster, billing, calculator, route optimizer, mileage, distance, Google Maps API" />
   <meta name="author" content="Vernon Long" />
@@ -20,9 +20,7 @@
 <body class="claim-cipher">
   <div class="sidebar">
     <ul class="menu-content">
-      <a href="../index.html">
-        <li><span>🏠</span> <span>Home</span></li>
-      </a>
+      <li><a href="../index.html"><span>🏠</span> <span>Home</span></a></li>
       <li><a href="../mileage/index.html"><span>📏</span> <span>Mileage</span></a></li>
       <li><a href="../router/index.html"><span>🗺️</span> <span>Router</span></a></li>
       <li><a href="../total/index.html"><span>📑</span> <span>Total Loss</span></a></li>
@@ -79,10 +77,12 @@
     </section>
   </main>
 
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR51CGOXEyVz8Dy-6hU7kdaqbq8-CTkBs&libraries=places&callback=initMap" async defer></script>
   <script src="../router/schedule.js"></script>
-  <script src="../router/router.js"></script>
+  <script src="router.js"></script>
   <script src="../script.js"></script>
   <script src="../utils.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR51CGOXEyVz8Dy-6hU7kdaqbq8-CTkBs&libraries=places" async defer></script>
+  
+ 
 </body>
 </html>

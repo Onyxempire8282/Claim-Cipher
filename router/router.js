@@ -1,16 +1,43 @@
+
 let map, directionsService, directionsRenderer, geocoder, homeMarker;
-
 function initServices() {
-  directionsService = new google.maps.DirectionsService();
-  directionsRenderer = new google.maps.DirectionsRenderer();
-  geocoder = new google.maps.Geocoder();
+  return new Promise((resolve, reject) => {
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    geocoder = new google.maps.Geocoder();
 
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
-    center: { lat: 39.8283, lng: -98.5795 },
+    map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: { lat: 39.8283, lng: -98.5795 },
+    });
+
+    directionsRenderer.setMap(map);
+
+    // Wait for the map to be idle before resolving the promise
+    google.maps.event.addListenerOnce(map, 'idle', () => {
+      resolve();
+    });
   });
+}
 
-  directionsRenderer.setMap(map);
+function initHomeMarker() {
+  const savedOrigin = sessionStorage.getItem("claimOrigin");
+  if (savedOrigin && geocoder) {
+    geocoder.geocode({ address: savedOrigin }, (results, status) => {
+      if (status === "OK") {
+        const loc = results[0].geometry.location;
+        homeMarker = new google.maps.Marker({
+          position: loc,
+          map: map,
+          icon: "https://maps.google.com/mapfiles/kml/shapes/homegardenbusiness.png",
+        });
+        map.setCenter(loc);
+        map.setZoom(8);  // Adjust zoom level as needed
+      } else {
+        console.error("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
 }
 
 window.initServices = initServices;
@@ -38,6 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window._claimSessionTimes = savedTimes; // store globally for later
+
+  // Initialize services and then call initHomeMarker
+  initServices().then(() => {
+    initHomeMarker();
+  });
 });
 
 function optimizeRoute() {
@@ -197,3 +229,6 @@ END:VCALENDAR`;
   const blob = new Blob([content.trim()], { type: 'text/calendar;charset=utf-8' });
   return URL.createObjectURL(blob);
 }
+
+// Make sure optimizeRoute is globally accessible
+window.optimizeRoute = optimizeRoute;

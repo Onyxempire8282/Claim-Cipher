@@ -22,6 +22,18 @@ function initServices() {
   if (!mapEl) {
     return;
   }
+  
+  // Check if we're on the router page - let router.js handle its own initialization
+  if (window.location.pathname.includes('/router/')) {
+    return;
+  }
+  
+  // Check if Google Maps is loaded
+  if (typeof google === 'undefined') {
+    console.log("Google Maps not loaded yet");
+    return;
+  }
+  
   console.log("Initializing Maps...");
   directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
@@ -31,9 +43,13 @@ function initServices() {
     center: { lat: 39.8283, lng: -98.5795 },
   });
   directionsRenderer.setMap(map);
-  new google.maps.places.Autocomplete(document.getElementById("origin"), {
-    types: ["address"],
-  });
+  
+  const originInput = document.getElementById("origin");
+  if (originInput && google.maps.places) {
+    new google.maps.places.Autocomplete(originInput, {
+      types: ["address"],
+    });
+  }
 }
 
 // Initialize services on pages with a map after DOM is ready

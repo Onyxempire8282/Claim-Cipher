@@ -1,0 +1,700 @@
+/* === Billing System Styles === */
+
+.billing__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.billing__card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.billing__card--primary {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 203, 243, 0.1));
+  border-color: rgba(33, 150, 243, 0.2);
+}
+
+.billing__card--warning {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 193, 7, 0.1));
+  border-color: rgba(255, 152, 0, 0.3);
+}
+
+.billing__card--enterprise {
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), rgba(233, 30, 99, 0.1));
+  border-color: rgba(156, 39, 176, 0.2);
+}
+
+.billing__heading {
+  color: #90caf9;
+  font-size: 1.5rem;
+  margin: 0 0 1.5rem 0;
+  border-bottom: 2px solid rgba(144, 202, 249, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+/* Current Subscription */
+.subscription__current {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.subscription__info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.subscription__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subscription__label {
+  color: #b0bec5;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.subscription__value {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.subscription__value--demo {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.subscription__value--basic {
+  background: rgba(33, 150, 243, 0.2);
+  color: #2196f3;
+}
+
+.subscription__value--premium,
+.subscription__value--admin {
+  background: rgba(156, 39, 176, 0.2);
+  color: #9c27b0;
+}
+
+.subscription__value--active {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.subscription__value--cancelled,
+.subscription__value--expired,
+.subscription__value--past_due {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
+/* Demo Info */
+.subscription__demo-info {
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.demo__status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.demo__icon {
+  font-size: 1.5rem;
+}
+
+.demo__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo__title {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.demo__expiry {
+  color: #fff9c4;
+  font-size: 0.9rem;
+}
+
+/* Plans Grid */
+.plans__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.plan__card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.plan__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.plan__card--basic {
+  border-color: rgba(33, 150, 243, 0.3);
+}
+
+.plan__card--premium {
+  border-color: rgba(156, 39, 176, 0.3);
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.05), rgba(233, 30, 99, 0.05));
+}
+
+.plan__card--recommended {
+  border-width: 2px;
+  transform: scale(1.02);
+}
+
+.plan__badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #9c27b0, #e91e63);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+}
+
+.plan__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.plan__name {
+  color: #90caf9;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.plan__amount {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.plan__period {
+  color: #b0bec5;
+  font-size: 1rem;
+}
+
+.plan__features {
+  margin-bottom: 2rem;
+}
+
+.features__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature__item {
+  color: #e0f7fa;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.feature__item::before {
+  content: '✓';
+  color: #4caf50;
+  font-weight: bold;
+  margin-right: 0.75rem;
+  font-size: 1rem;
+}
+
+.plan__button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn--disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: #78909c;
+  cursor: not-allowed;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn--disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Payment Method */
+.payment__method {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.payment__info {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment__placeholder {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.payment__icon {
+  font-size: 2rem;
+  opacity: 0.7;
+}
+
+.payment__message {
+  color: #e0f7fa;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
+}
+
+.payment__description {
+  color: #b0bec5;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.payment__card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.card__brand {
+  color: #90caf9;
+  font-weight: 600;
+}
+
+.card__number {
+  color: #ffffff;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+.card__expiry {
+  color: #b0bec5;
+  font-size: 0.9rem;
+}
+
+.payment__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Billing History */
+.billing__history {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history__placeholder {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.history__icon {
+  font-size: 2rem;
+  opacity: 0.7;
+}
+
+.history__message {
+  color: #e0f7fa;
+  font-weight: 500;
+  margin: 0 0 0.25rem 0;
+}
+
+.history__description {
+  color: #b0bec5;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.history__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.history__item {
+  display: grid;
+  grid-template-columns: 100px 120px 80px 80px 120px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.history__date {
+  color: #b0bec5;
+}
+
+.history__plan {
+  color: #90caf9;
+  font-weight: 500;
+}
+
+.history__amount {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.history__status {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status__paid {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.status__pending {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.status__failed {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
+.history__method {
+  color: #b0bec5;
+}
+
+.btn--link {
+  background: none;
+  border: none;
+  color: #90caf9;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.btn--link:hover {
+  color: #bbdefb;
+}
+
+/* Account Warning */
+.account__warning {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.warning__icon {
+  font-size: 2rem;
+  color: #ff9800;
+  flex-shrink: 0;
+}
+
+.warning__content {
+  flex: 1;
+}
+
+.warning__title {
+  color: #ff9800;
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.warning__message {
+  color: #ffcc80;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+}
+
+.warning__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Enterprise Section */
+.enterprise__info {
+  text-align: center;
+}
+
+.enterprise__title {
+  color: #9c27b0;
+  font-size: 1.3rem;
+  margin: 0 0 1rem 0;
+}
+
+.enterprise__description {
+  color: #e1bee7;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.enterprise__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.enterprise__features li {
+  color: #e1bee7;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.enterprise__features li::before {
+  content: '●';
+  color: #9c27b0;
+  position: absolute;
+  left: 0;
+}
+
+/* Subscription Modal */
+.modal-content--billing {
+  max-width: 500px;
+  background: rgba(15, 32, 39, 0.95);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.billing__modal-header {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.billing__modal-title {
+  color: #90caf9;
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.billing__modal-subtitle {
+  color: #b0bec5;
+  margin: 0;
+}
+
+.billing__modal-content {
+  margin-top: 2rem;
+}
+
+.plan__summary {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.plan__modal-name {
+  color: #90caf9;
+  font-size: 1.3rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.plan__modal-price {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.plan__modal-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.plan__modal-features li {
+  color: #e0f7fa;
+  font-size: 0.9rem;
+}
+
+.form__section-title {
+  color: #90caf9;
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+}
+
+.stripe__placeholder {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 203, 243, 0.1));
+  border: 1px solid rgba(33, 150, 243, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.stripe__logo {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.stripe__title {
+  color: #90caf9;
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.stripe__description {
+  color: #b0bec5;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Status Indicators */
+.status__indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.status__indicator--active {
+  background: #4caf50;
+}
+
+.status__indicator--issue {
+  background: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .plans__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .plan__card--recommended {
+    transform: none;
+  }
+  
+  .subscription__info-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .billing__container {
+    padding: 1rem;
+  }
+  
+  .billing__card {
+    padding: 1.5rem;
+  }
+  
+  .history__item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .payment__actions,
+  .warning__actions {
+    flex-direction: column;
+  }
+  
+  .payment__actions .btn,
+  .warning__actions .btn {
+    width: 100%;
+  }
+  
+  .account__warning {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content--billing {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .plan__amount {
+    font-size: 2rem;
+  }
+  
+  .billing__heading {
+    font-size: 1.3rem;
+  }
+}

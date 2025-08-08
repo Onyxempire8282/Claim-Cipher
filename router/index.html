@@ -15,16 +15,40 @@
   <link rel="stylesheet" href="../pages/schedule.css" />
   <link rel="stylesheet" href="../blocks/sidebar.css" />
   <link rel="stylesheet" href="../blocks/router.css" />
+  <link rel="stylesheet" href="../blocks/auth.css" />
+  <link rel="stylesheet" href="../blocks/help.css" />
 </head>
 
 <body class="claim-cipher">
   <div class="sidebar">
+    <div class="sidebar__user" id="userMenuItem" style="display: none;">
+      <div class="user__icon" id="userIcon">
+        <span class="user__initials"></span>
+      </div>
+      <div class="user__dropdown" id="userDropdown">
+        <ul>
+          <li><a href="../settings/index.html">Profile</a></li>
+          <li><a href="../settings/index.html">Settings</a></li>
+          <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    
     <ul class="menu-content">
+<<<<<<< HEAD
       <li><a href="../index.html"><span>🏠</span> <span>Home</span></a></li>
       <li><a href="../mileage/index.html"><span>📏</span> <span>Mileage</span></a></li>
       <li><a href="../router/index.html"><span>🗺️</span> <span>Router</span></a></li>
       <li><a href="../total/index.html"><span>📑</span> <span>Total Loss</span></a></li>
       <li><a href="../about/index.html"><span>ℹ️</span> <span>About</span></a></li>
+=======
+      <li><a href="../index.html"><span>🏠</span><span>Home</span></a></li>
+      <li><a href="../mileage/index.html"><span>📏</span><span>Mileage</span></a></li>
+      <li><a href="../router/index.html"><span>🗺️</span><span>Router</span></a></li>
+      <li><a href="../total/index.html"><span>📑</span><span>Total Loss</span></a></li>
+      <li><a href="../about/index.html"><span>ℹ️</span><span>About</span></a></li>
+      <li id="loginMenuItem"><a href="#" id="loginBtn"><span>👤</span><span>Login</span></a></li>
+>>>>>>> 3fe5ca91d419626b16c7bbb6c6a5ad8c0ad4ca37
     </ul>
   </div>
 
@@ -77,7 +101,71 @@
     </section>
   </main>
 
+<<<<<<< HEAD
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR51CGOXEyVz8Dy-6hU7kdaqbq8-CTkBs&libraries=places&callback=initMap" async defer></script>
+=======
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content modal-content--login">
+      <div class="modal__header">
+        <span class="close-button" id="closeLogin">&times;</span>
+        <div class="login__branding">
+          <h2 class="login__title">Claim Cipher</h2>
+          <p class="login__tagline">Your Complete Adjusting Toolkit</p>
+        </div>
+      </div>
+      
+      <form id="loginForm" class="login__form">
+        <div class="form__group">
+          <label for="loginEmail" class="form__label">Email Address</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            name="email" 
+            class="form__input" 
+            required 
+            placeholder="Enter your email"
+          />
+        </div>
+        
+        <div class="form__group">
+          <label for="loginPassword" class="form__label">Password</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            name="password" 
+            class="form__input" 
+            required 
+            placeholder="Enter your password"
+          />
+        </div>
+        
+        <div class="form__actions">
+          <button type="submit" class="btn btn--primary btn--full">Sign In</button>
+          <a href="#" class="form__link" id="forgotPassword">Forgot Password?</a>
+        </div>
+        
+        <div class="form__demo">
+          <p class="demo__text">New to Claim Cipher?</p>
+          <button type="button" class="btn btn--secondary btn--full" id="demoLogin">
+            Start 7-Day Free Demo
+          </button>
+        </div>
+      </form>
+      
+      <div class="login__footer">
+        <p class="login__terms">
+          By signing in, you agree to our 
+          <a href="#" class="form__link">Terms of Service</a> and 
+          <a href="#" class="form__link">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../auth.js"></script>
+  <script src="../help.js"></script>
+>>>>>>> 3fe5ca91d419626b16c7bbb6c6a5ad8c0ad4ca37
   <script src="../router/schedule.js"></script>
   <script src="router.js"></script>
   <script src="../script.js"></script>

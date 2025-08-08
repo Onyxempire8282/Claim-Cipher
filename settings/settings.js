@@ -202,8 +202,8 @@ class SettingsManager {
   }
 
   openBillingPortal() {
-    // This would integrate with Stripe billing portal in production
-    alert('Billing portal would open here. This is a mock for now.\n\nIn production, this would open Stripe Customer Portal for subscription management.');
+    // Redirect to dedicated billing page
+    window.location.href = '../billing/index.html';
   }
 
   showUpgradeOptions() {

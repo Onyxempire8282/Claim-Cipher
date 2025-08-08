@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billing & Subscription - Claim Cipher</title>
+  <meta name="description" content="Manage your subscription and billing">
+  <meta name="keywords" content="claim cipher, billing, subscription, payment">
+  <meta name="author" content="Vernon Long">
+  
+  <!-- Vendor & Base Styles -->
+  <link rel="stylesheet" href="../vendor/normalize.css">
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../blocks/sidebar.css">
+  <link rel="stylesheet" href="../blocks/header.css">
+  <link rel="stylesheet" href="../blocks/router.css">
+  <link rel="stylesheet" href="../blocks/calculator.css">
+  <link rel="stylesheet" href="../blocks/auth.css">
+  <link rel="stylesheet" href="../blocks/settings.css">
+  <link rel="stylesheet" href="../blocks/billing.css">
+  <link rel="stylesheet" href="../blocks/help.css">
+  <!-- Page Styles -->
+  <link rel="stylesheet" href="../pages/index.css">
+  <link rel="stylesheet" href="../pages/print.css" media="print">
+  <link rel="stylesheet" href="../pages/schedule.css">
+</head>
+
+<body class="claim-cipher">
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="sidebar__user" id="userMenuItem" style="display: none;">
+      <div class="user__icon" id="userIcon">
+        <span class="user__initials"></span>
+      </div>
+      <div class="user__dropdown" id="userDropdown">
+        <ul>
+          <li><a href="../settings/index.html">Profile</a></li>
+          <li><a href="../settings/index.html">Settings</a></li>
+          <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <ul class="menu-content">
+      <li><a href="../index.html"><span>🏠</span><span>Home</span></a></li>
+      <li><a href="../mileage/index.html"><span>📏</span><span>Mileage</span></a></li>
+      <li><a href="../router/index.html"><span>🗺️</span><span>Router</span></a></li>
+      <li><a href="../total/index.html"><span>📑</span><span>Total Loss</span></a></li>
+      <li><a href="../about/index.html"><span>ℹ️</span><span>About</span></a></li>
+      <li id="loginMenuItem"><a href="#" id="loginBtn"><span>👤</span><span>Login</span></a></li>
+    </ul>
+  </div>
+
+  <main class="claim-cipher__main">
+    <header class="claim-cipher__page-header">
+      <h1>💳 Billing & Subscription</h1>
+    </header>
+
+    <section class="claim-cipher__content">
+      <div class="billing__container">
+        <!-- Current Subscription Status -->
+        <div class="billing__card billing__card--primary">
+          <h2 class="billing__heading">Current Subscription</h2>
+          <div class="subscription__current">
+            <div class="subscription__info-row">
+              <div class="subscription__detail">
+                <span class="subscription__label">Plan:</span>
+                <span id="currentPlan" class="subscription__value">Loading...</span>
+              </div>
+              <div class="subscription__detail">
+                <span class="subscription__label">Status:</span>
+                <span id="currentStatus" class="subscription__value">Loading...</span>
+              </div>
+            </div>
+            
+            <div class="subscription__info-row">
+              <div class="subscription__detail">
+                <span class="subscription__label">Next Billing:</span>
+                <span id="nextBilling" class="subscription__value">Loading...</span>
+              </div>
+              <div class="subscription__detail">
+                <span class="subscription__label">Amount:</span>
+                <span id="billingAmount" class="subscription__value">Loading...</span>
+              </div>
+            </div>
+            
+            <div class="subscription__demo-info" id="demoInfo" style="display: none;">
+              <div class="demo__status">
+                <span class="demo__icon">⏰</span>
+                <div class="demo__text">
+                  <span class="demo__title">Demo Period Active</span>
+                  <span class="demo__expiry">Expires: <span id="demoExpiryDate">Loading...</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subscription Plans -->
+        <div class="billing__card">
+          <h2 class="billing__heading">Available Plans</h2>
+          <div class="plans__grid">
+            <!-- Basic Plan -->
+            <div class="plan__card plan__card--basic" id="basicPlan">
+              <div class="plan__header">
+                <h3 class="plan__name">Web Access</h3>
+                <div class="plan__price">
+                  <span class="plan__amount">$30</span>
+                  <span class="plan__period">/month</span>
+                </div>
+              </div>
+              
+              <div class="plan__features">
+                <ul class="features__list">
+                  <li class="feature__item">✓ Route Optimizer</li>
+                  <li class="feature__item">✓ Mileage Calculator</li>
+                  <li class="feature__item">✓ Basic Reporting</li>
+                  <li class="feature__item">✓ Email Support</li>
+                  <li class="feature__item">✓ Cloud Storage</li>
+                </ul>
+              </div>
+              
+              <button class="plan__button btn btn--secondary" data-plan="basic">
+                Select Plan
+              </button>
+            </div>
+            
+            <!-- Premium Plan -->
+            <div class="plan__card plan__card--premium plan__card--recommended" id="premiumPlan">
+              <div class="plan__badge">Most Popular</div>
+              <div class="plan__header">
+                <h3 class="plan__name">Premium</h3>
+                <div class="plan__price">
+                  <span class="plan__amount">$50</span>
+                  <span class="plan__period">/month</span>
+                </div>
+              </div>
+              
+              <div class="plan__features">
+                <ul class="features__list">
+                  <li class="feature__item">✓ Everything in Web Access</li>
+                  <li class="feature__item">✓ Mobile App</li>
+                  <li class="feature__item">✓ AI-Powered Summaries</li>
+                  <li class="feature__item">✓ Advanced Analytics</li>
+                  <li class="feature__item">✓ Calendar Integration</li>
+                  <li class="feature__item">✓ Priority Support</li>
+                  <li class="feature__item">✓ Advanced Export Options</li>
+                </ul>
+              </div>
+              
+              <button class="plan__button btn btn--primary" data-plan="premium">
+                Select Plan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="billing__card">
+          <h2 class="billing__heading">Payment Method</h2>
+          <div class="payment__method">
+            <div class="payment__info" id="paymentInfo">
+              <div class="payment__placeholder">
+                <div class="payment__icon">💳</div>
+                <div class="payment__text">
+                  <p class="payment__message">No payment method on file</p>
+                  <p class="payment__description">Add a payment method to activate your subscription</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="payment__actions">
+              <button class="btn btn--primary" id="addPaymentMethod">
+                Add Payment Method
+              </button>
+              <button class="btn btn--secondary" id="updatePaymentMethod" style="display: none;">
+                Update Payment Method
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing History -->
+        <div class="billing__card">
+          <h2 class="billing__heading">Billing History</h2>
+          <div class="billing__history">
+            <div class="history__placeholder" id="historyPlaceholder">
+              <div class="history__icon">📄</div>
+              <div class="history__text">
+                <p class="history__message">No billing history yet</p>
+                <p class="history__description">Your invoices and payment history will appear here</p>
+              </div>
+            </div>
+            
+            <div class="history__list" id="historyList" style="display: none;">
+              <!-- Billing history will be populated here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Status -->
+        <div class="billing__card billing__card--warning" id="warningCard" style="display: none;">
+          <h2 class="billing__heading">Account Status</h2>
+          <div class="account__warning">
+            <div class="warning__icon">⚠️</div>
+            <div class="warning__content">
+              <h3 class="warning__title" id="warningTitle">Action Required</h3>
+              <p class="warning__message" id="warningMessage">Loading...</p>
+              <div class="warning__actions">
+                <button class="btn btn--primary" id="reactivateAccount">
+                  Reactivate Account
+                </button>
+                <button class="btn btn--secondary" id="updatePayment">
+                  Update Payment Method
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enterprise Contact -->
+        <div class="billing__card billing__card--enterprise">
+          <h2 class="billing__heading">Enterprise & Custom Solutions</h2>
+          <div class="enterprise__info">
+            <div class="enterprise__content">
+              <h3 class="enterprise__title">Need a custom solution?</h3>
+              <p class="enterprise__description">
+                Contact us for enterprise pricing, custom integrations, and volume discounts. 
+                We offer special rates for agencies with 10+ adjusters.
+              </p>
+              <ul class="enterprise__features">
+                <li>Custom integrations with your existing systems</li>
+                <li>Dedicated account management</li>
+                <li>Priority feature development</li>
+                <li>Volume pricing discounts</li>
+                <li>On-premise deployment options</li>
+              </ul>
+              <button class="btn btn--primary" id="contactSales">
+                Contact Sales
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Subscription Modal -->
+  <div id="subscriptionModal" class="modal">
+    <div class="modal-content modal-content--billing">
+      <div class="modal__header">
+        <span class="close-button" id="closeSubscription">&times;</span>
+        <div class="billing__modal-header">
+          <h2 class="billing__modal-title">Complete Your Subscription</h2>
+          <p class="billing__modal-subtitle">Choose your plan and payment method</p>
+        </div>
+      </div>
+      
+      <div class="billing__modal-content">
+        <div class="plan__summary" id="planSummary">
+          <!-- Plan summary will be populated here -->
+        </div>
+        
+        <div class="payment__form">
+          <h3 class="form__section-title">Payment Information</h3>
+          <div class="stripe__placeholder">
+            <div class="stripe__logo">💳</div>
+            <div class="stripe__text">
+              <h4 class="stripe__title">Secure Payment Processing</h4>
+              <p class="stripe__description">
+                In production, this would integrate with Stripe for secure payment processing.
+                For this demo, subscription changes are simulated.
+              </p>
+            </div>
+          </div>
+          
+          <button class="btn btn--primary btn--full" id="confirmSubscription">
+            Confirm Subscription
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content modal-content--login">
+      <div class="modal__header">
+        <span class="close-button" id="closeLogin">&times;</span>
+        <div class="login__branding">
+          <h2 class="login__title">Claim Cipher</h2>
+          <p class="login__tagline">Your Complete Adjusting Toolkit</p>
+        </div>
+      </div>
+      
+      <form id="loginForm" class="login__form">
+        <div class="form__group">
+          <label for="loginEmail" class="form__label">Email Address</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            name="email" 
+            class="form__input" 
+            required 
+            placeholder="Enter your email"
+          />
+        </div>
+        
+        <div class="form__group">
+          <label for="loginPassword" class="form__label">Password</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            name="password" 
+            class="form__input" 
+            required 
+            placeholder="Enter your password"
+          />
+        </div>
+        
+        <div class="form__actions">
+          <button type="submit" class="btn btn--primary btn--full">Sign In</button>
+          <a href="#" class="form__link" id="forgotPassword">Forgot Password?</a>
+        </div>
+        
+        <div class="form__demo">
+          <p class="demo__text">New to Claim Cipher?</p>
+          <button type="button" class="btn btn--secondary btn--full" id="demoLogin">
+            Start 7-Day Free Demo
+          </button>
+        </div>
+      </form>
+      
+      <div class="login__footer">
+        <p class="login__terms">
+          By signing in, you agree to our 
+          <a href="#" class="form__link">Terms of Service</a> and 
+          <a href="#" class="form__link">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../auth.js"></script>
+  <script src="../help.js"></script>
+  <script src="billing.js"></script>
+  <script src="../script.js"></script>
+  <script src="../utils.js"></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - Claim Cipher</title>
+  <meta name="description" content="User settings and profile management">
+  <meta name="keywords" content="claim cipher, settings, profile, user management">
+  <meta name="author" content="Vernon Long">
+  
+  <!-- Vendor & Base Styles -->
+  <link rel="stylesheet" href="../vendor/normalize.css">
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../blocks/sidebar.css">
+  <link rel="stylesheet" href="../blocks/header.css">
+  <link rel="stylesheet" href="../blocks/router.css">
+  <link rel="stylesheet" href="../blocks/calculator.css">
+  <link rel="stylesheet" href="../blocks/auth.css">
+  <link rel="stylesheet" href="../blocks/settings.css">
+  <!-- Page Styles -->
+  <link rel="stylesheet" href="../pages/index.css">
+  <link rel="stylesheet" href="../pages/print.css" media="print">
+  <link rel="stylesheet" href="../pages/schedule.css">
+</head>
+
+<body class="claim-cipher">
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="sidebar__user" id="userMenuItem" style="display: none;">
+      <div class="user__icon" id="userIcon">
+        <span class="user__initials"></span>
+      </div>
+      <div class="user__dropdown" id="userDropdown">
+        <ul>
+          <li><a href="../settings/index.html">Profile</a></li>
+          <li><a href="../settings/index.html">Settings</a></li>
+          <li><a href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <ul class="menu-content">
+      <li><a href="../index.html"><span>🏠</span><span>Home</span></a></li>
+      <li><a href="../mileage/index.html"><span>📏</span><span>Mileage</span></a></li>
+      <li><a href="../router/index.html"><span>🗺️</span><span>Router</span></a></li>
+      <li><a href="../total/index.html"><span>📑</span><span>Total Loss</span></a></li>
+      <li><a href="../about/index.html"><span>ℹ️</span><span>About</span></a></li>
+      <li id="loginMenuItem"><a href="#" id="loginBtn"><span>👤</span><span>Login</span></a></li>
+    </ul>
+  </div>
+
+  <main class="claim-cipher__main">
+    <header class="claim-cipher__page-header">
+      <h1>⚙️ Settings</h1>
+    </header>
+
+    <section class="claim-cipher__content">
+      <div class="settings__container">
+        <!-- User Profile Section -->
+        <div class="settings__card">
+          <h2 class="settings__heading">User Profile</h2>
+          <form id="profileForm" class="settings__form">
+            <div class="form__group">
+              <label for="profileName" class="form__label">Full Name</label>
+              <input 
+                type="text" 
+                id="profileName" 
+                name="name" 
+                class="form__input" 
+                placeholder="Enter your full name"
+              />
+            </div>
+            
+            <div class="form__group">
+              <label for="profileEmail" class="form__label">Email Address</label>
+              <input 
+                type="email" 
+                id="profileEmail" 
+                name="email" 
+                class="form__input" 
+                placeholder="Enter your email"
+                readonly
+              />
+            </div>
+            
+            <div class="form__group">
+              <label for="profileInitials" class="form__label">Initials</label>
+              <input 
+                type="text" 
+                id="profileInitials" 
+                name="initials" 
+                class="form__input" 
+                placeholder="e.g., VL"
+                maxlength="3"
+              />
+            </div>
+            
+            <button type="submit" class="btn btn--primary">Update Profile</button>
+          </form>
+        </div>
+
+        <!-- Subscription Section -->
+        <div class="settings__card">
+          <h2 class="settings__heading">Subscription</h2>
+          <div class="subscription__info">
+            <div class="subscription__tier">
+              <span class="subscription__label">Current Plan:</span>
+              <span id="subscriptionTier" class="subscription__value">Loading...</span>
+            </div>
+            <div class="subscription__status">
+              <span class="subscription__label">Status:</span>
+              <span id="subscriptionStatus" class="subscription__value">Loading...</span>
+            </div>
+            <div class="subscription__expiry" id="demoExpirySection" style="display: none;">
+              <span class="subscription__label">Demo Expires:</span>
+              <span id="demoExpiry" class="subscription__value">Loading...</span>
+            </div>
+          </div>
+          
+          <div class="subscription__actions">
+            <button class="btn btn--primary" id="manageBilling">Manage Billing</button>
+            <button class="btn btn--secondary" id="upgradeSubscription">Upgrade Plan</button>
+          </div>
+        </div>
+
+        <!-- Firm Settings Section -->
+        <div class="settings__card">
+          <h2 class="settings__heading">Firm Settings</h2>
+          <form id="firmForm" class="settings__form">
+            <div class="form__group">
+              <label for="preferredFirm" class="form__label">Preferred TPA Firm</label>
+              <select id="preferredFirm" name="preferredFirm" class="form__input form__select">
+                <option value="">Select a firm...</option>
+                <option value="crawford">Crawford & Company</option>
+                <option value="sedgwick">Sedgwick</option>
+                <option value="gallagher">Gallagher Bassett</option>
+                <option value="claimsone">ClaimsONE</option>
+                <option value="custom">Custom Firm</option>
+              </select>
+            </div>
+            
+            <div class="form__group" id="customFirmGroup" style="display: none;">
+              <label for="customFirmName" class="form__label">Custom Firm Name</label>
+              <input 
+                type="text" 
+                id="customFirmName" 
+                name="customFirmName" 
+                class="form__input" 
+                placeholder="Enter firm name"
+              />
+            </div>
+            
+            <div class="form__group">
+              <label for="mileageRate" class="form__label">Mileage Rate (per mile)</label>
+              <input 
+                type="number" 
+                id="mileageRate" 
+                name="mileageRate" 
+                class="form__input" 
+                placeholder="0.655"
+                step="0.001"
+                min="0"
+              />
+            </div>
+            
+            <button type="submit" class="btn btn--primary">Save Firm Settings</button>
+          </form>
+        </div>
+
+        <!-- Mobile Sync Section -->
+        <div class="settings__card">
+          <h2 class="settings__heading">Mobile Integration</h2>
+          <div class="mobile__settings">
+            <div class="toggle__group">
+              <label class="toggle__label">
+                <input type="checkbox" id="mobileSyncEnabled" class="toggle__input">
+                <span class="toggle__slider"></span>
+                Enable Mobile Sync
+              </label>
+              <p class="toggle__description">
+                Sync photos and data from the mobile app (coming soon)
+              </p>
+            </div>
+            
+            <div class="mobile__info" id="mobileSyncInfo" style="display: none;">
+              <p class="mobile__text">
+                Mobile sync allows you to:
+              </p>
+              <ul class="mobile__features">
+                <li>Upload claim photos from your phone</li>
+                <li>Generate AI-powered damage summaries</li>
+                <li>Sync inspection data to web dashboard</li>
+                <li>Access offline claim data</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="settings__card settings__card--danger">
+          <h2 class="settings__heading">Account Actions</h2>
+          <div class="danger__actions">
+            <button class="btn btn--danger" id="deleteAccount">Delete Account</button>
+            <p class="danger__warning">
+              ⚠️ This action cannot be undone. All your data will be permanently deleted.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content modal-content--login">
+      <div class="modal__header">
+        <span class="close-button" id="closeLogin">&times;</span>
+        <div class="login__branding">
+          <h2 class="login__title">Claim Cipher</h2>
+          <p class="login__tagline">Your Complete Adjusting Toolkit</p>
+        </div>
+      </div>
+      
+      <form id="loginForm" class="login__form">
+        <div class="form__group">
+          <label for="loginEmail" class="form__label">Email Address</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            name="email" 
+            class="form__input" 
+            required 
+            placeholder="Enter your email"
+          />
+        </div>
+        
+        <div class="form__group">
+          <label for="loginPassword" class="form__label">Password</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            name="password" 
+            class="form__input" 
+            required 
+            placeholder="Enter your password"
+          />
+        </div>
+        
+        <div class="form__actions">
+          <button type="submit" class="btn btn--primary btn--full">Sign In</button>
+          <a href="#" class="form__link" id="forgotPassword">Forgot Password?</a>
+        </div>
+        
+        <div class="form__demo">
+          <p class="demo__text">New to Claim Cipher?</p>
+          <button type="button" class="btn btn--secondary btn--full" id="demoLogin">
+            Start 7-Day Free Demo
+          </button>
+        </div>
+      </form>
+      
+      <div class="login__footer">
+        <p class="login__terms">
+          By signing in, you agree to our 
+          <a href="#" class="form__link">Terms of Service</a> and 
+          <a href="#" class="form__link">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../auth.js"></script>
+  <script src="settings.js"></script>
+  <script src="../script.js"></script>
+  <script src="../utils.js"></script>
+</body>
+</html>

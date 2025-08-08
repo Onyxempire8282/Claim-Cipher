@@ -1,0 +1,350 @@
+/* === Authentication Modal Styles === */
+
+/* Login Modal */
+.modal-content--login {
+  max-width: 400px;
+  background: rgba(15, 32, 39, 0.95);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal__header {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.login__branding {
+  margin-top: 1rem;
+}
+
+.login__title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #90caf9;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 1px;
+}
+
+.login__tagline {
+  color: #b0bec5;
+  font-size: 0.9rem;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Form Styles */
+.login__form {
+  margin-bottom: 1.5rem;
+}
+
+.form__group {
+  margin-bottom: 1.5rem;
+}
+
+.form__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #e0f7fa;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: #2196f3;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
+}
+
+.form__input::placeholder {
+  color: #78909c;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.btn--primary:hover {
+  background: linear-gradient(135deg, #1976d2, #0277bd);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #90caf9;
+  border: 1px solid rgba(144, 202, 249, 0.5);
+}
+
+.btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #90caf9;
+  transform: translateY(-1px);
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form__link {
+  color: #90caf9;
+  text-decoration: none;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.form__link:hover {
+  color: #bbdefb;
+  text-decoration: underline;
+}
+
+/* Demo Section */
+.form__demo {
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.demo__text {
+  margin: 0 0 0.75rem 0;
+  color: #fff9c4;
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.login__footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.login__terms {
+  font-size: 0.8rem;
+  color: #78909c;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* User Icon and Dropdown */
+.user__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user__icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.user__initials {
+  display: none; /* Will be shown when user is logged in */
+}
+
+.user__dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: rgba(15, 32, 39, 0.95);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  min-width: 150px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.user__dropdown.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.user__dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.user__dropdown li {
+  margin: 0;
+}
+
+.user__dropdown a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #e0f7fa;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.user__dropdown a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Demo Warning Bar */
+.demo-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+.demo-warning__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.demo-warning__icon {
+  font-size: 1.2rem;
+}
+
+.demo-warning__text {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.demo-warning__subscribe {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.demo-warning__subscribe:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Notification System */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 500;
+  z-index: 1002;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  display: none;
+  max-width: 400px;
+}
+
+.notification--success {
+  background: rgba(76, 175, 80, 0.9);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.notification--error {
+  background: rgba(244, 67, 54, 0.9);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.notification--warning {
+  background: rgba(255, 152, 0, 0.9);
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.notification--info {
+  background: rgba(33, 150, 243, 0.9);
+  border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .modal-content--login {
+    width: 90%;
+    max-width: 350px;
+    padding: 1.5rem;
+  }
+  
+  .login__title {
+    font-size: 1.5rem;
+  }
+  
+  .demo-warning__content {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+}

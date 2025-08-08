@@ -3,8 +3,8 @@ class AuthSystem {
   constructor() {
     this.currentUser = null;
     this.masterUsers = [
-      { email: 'vernon@claimcipher.com', password: 'master2024', name: 'Vernon Long', initials: 'VL', type: 'admin' },
-      { email: 'nneka@claimcipher.com', password: 'master2024', name: 'Nneka Johnson', initials: 'NJ', type: 'admin' }
+      { email: 'inspects@flav8r.net', password: 'master2024', name: 'Vernon Long', initials: 'VL', type: 'admin' },
+      { email: 'inspects@flav8r.net', password: 'master2025', name: 'Nneka Long', initials: 'NL', type: 'admin' }
     ];
     this.init();
   }

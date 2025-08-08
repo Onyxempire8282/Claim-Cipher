@@ -51,7 +51,7 @@
 
     <section class="claim-cipher__route-optimizer">
       <div class="claim-cipher__top-row">
-        <!-- Inputs -->
+        
         <div class="claim-cipher__route-inputs">
           <label for="origin" class="claim-cipher__label">Starting Address:</label>
           <input type="text" id="origin" class="claim-cipher__input" placeholder="Your home address" />
@@ -71,18 +71,18 @@
           <button class="claim-cipher__button" onclick="optimizeRoute()">Optimize Route</button>
         </div>
 
-        <!-- Map -->
+        
         <div class="claim-cipher__route-map">
           <div id="map" class="claim-cipher__map"></div>
         </div>
       </div>
 
-      <!-- Route Summary + Results -->
+      
       <h3 class="claim-cipher__section-title">Route Details</h3>
       <div id="routeSummary"></div>
       <div id="routeResults" class="claim-cipher__results"></div>
 
-      <!-- Modal -->
+      
       <div id="scheduleModal" class="modal">
         <div class="modal-content">
           <span id="closeModal" class="close-button">&times;</span>
@@ -93,7 +93,7 @@
     </section>
   </main>
 
-  <!-- Login Modal -->
+  
   <div id="loginModal" class="modal">
     <div class="modal-content modal-content--login">
       <div class="modal__header">
@@ -152,7 +152,42 @@
     </div>
   </div>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDR51CGOXEyVz8Dy-6hU7kdaqbq8-CTkBs&libraries=places&callback=initMap" async defer></script>
+  <script src="../config.js"></script>
+  <script>
+    // Dynamic Google Maps API loading with error handling
+    function loadGoogleMapsAPI() {
+      // Check if we're in demo mode or have no API key
+      if (!window.CONFIG || window.CONFIG.DEMO_MODE || window.CONFIG.GOOGLE_MAPS_API_KEY === 'YOUR_GOOGLE_MAPS_API_KEY_HERE') {
+        console.log('Running in demo mode - Google Maps API not loaded');
+        // Initialize in demo mode
+        setTimeout(() => {
+          if (window.initMap) {
+            window.initMap();
+          }
+        }, 100);
+        return;
+      }
+
+      // Load Google Maps API with the configured key
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${window.CONFIG.GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
+      script.async = true;
+      script.defer = true;
+      
+      // Add error handling
+      script.onerror = function() {
+        console.error('Failed to load Google Maps API');
+        if (window.initMap) {
+          window.initMap(); // Initialize in fallback mode
+        }
+      };
+      
+      document.head.appendChild(script);
+    }
+
+    // Load the API when page loads
+    document.addEventListener('DOMContentLoaded', loadGoogleMapsAPI);
+  </script>
   <script src="../auth.js"></script>
   <script src="../help.js"></script>
   <script src="../router/schedule.js"></script>

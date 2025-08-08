@@ -1,36 +1,55 @@
 let routerMap, routerDirectionsService, routerDirectionsRenderer, routerGeocoder, routerHomeMarker;
 
 function initRouterServices() {
-  // Only initialize if Google Maps is loaded and map element exists
-  if (typeof google === 'undefined' || !document.getElementById("map")) {
-    console.log('Google Maps not loaded or map element not found');
+  // Check if we're in demo mode or Maps API failed to load
+  if (typeof google === 'undefined' || !google.maps) {
+    console.log('Google Maps not available - using demo mode');
+    displayMapFallback();
     return;
   }
 
-  routerDirectionsService = new google.maps.DirectionsService();
-  routerDirectionsRenderer = new google.maps.DirectionsRenderer();
-  routerGeocoder = new google.maps.Geocoder();
-
-  routerMap = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
-    center: { lat: 39.8283, lng: -98.5795 },
-  });
-
-  routerDirectionsRenderer.setMap(routerMap);
-  
-  // Add autocomplete to origin input if it exists
-  const originInput = document.getElementById("origin");
-  if (originInput && google.maps.places) {
-    new google.maps.places.Autocomplete(originInput, {
-      types: ["address"],
-    });
+  // Check if map element exists
+  if (!document.getElementById("map")) {
+    console.log('Map element not found');
+    return;
   }
-  
-  console.log('Router services initialized');
+
+  try {
+    routerDirectionsService = new google.maps.DirectionsService();
+    routerDirectionsRenderer = new google.maps.DirectionsRenderer();
+    routerGeocoder = new google.maps.Geocoder();
+
+    const mapConfig = window.CONFIG ? {
+      zoom: window.CONFIG.DEFAULT_ZOOM || 4,
+      center: window.CONFIG.DEFAULT_MAP_CENTER || { lat: 39.8283, lng: -98.5795 }
+    } : {
+      zoom: 4,
+      center: { lat: 39.8283, lng: -98.5795 }
+    };
+
+    routerMap = new google.maps.Map(document.getElementById("map"), mapConfig);
+    routerDirectionsRenderer.setMap(routerMap);
+    
+    // Add autocomplete to origin input if Places API is available
+    const originInput = document.getElementById("origin");
+    if (originInput && google.maps.places && google.maps.places.Autocomplete) {
+      new google.maps.places.Autocomplete(originInput, {
+        types: ["address"],
+      });
+    }
+    
+    console.log('Router services initialized successfully');
+  } catch (error) {
+    console.error('Error initializing Google Maps:', error);
+    displayMapFallback();
+  }
 }
 
 // Google Maps callback function
 function initMap() {
+  if (window.CONFIG && window.CONFIG.DEBUG) {
+    console.log('initMap called');
+  }
   initRouterServices();
 }
 
@@ -216,11 +235,26 @@ function displayMapFallback() {
   const mapElement = document.getElementById("map");
   if (mapElement) {
     mapElement.innerHTML = `
-      <div style="display: flex; justify-content: center; align-items: center; height: 100%; background-color: #f0f0f0; border: 2px dashed #ccc;">
-        <div style="text-align: center; padding: 20px;">
-          <h3>🗺️ Map View</h3>
-          <p>Interactive map will display here when Google Maps API is available.</p>
-          <p>Route optimization is working in demonstration mode.</p>
+      <div style="display: flex; justify-content: center; align-items: center; height: 100%; background-color: #f0f0f0; border: 2px dashed #ccc; border-radius: 8px;">
+        <div style="text-align: center; padding: 20px; max-width: 400px;">
+          <div style="font-size: 48px; margin-bottom: 16px;">🗺️</div>
+          <h3 style="margin: 0 0 12px 0; color: #333;">Map Demo Mode</h3>
+          <p style="margin: 0 0 8px 0; color: #666; font-size: 14px;">
+            Interactive map will display here when Google Maps API is configured.
+          </p>
+          <p style="margin: 0; color: #888; font-size: 12px;">
+            Route optimization is working in demonstration mode.
+          </p>
+          ${window.CONFIG && window.CONFIG.DEBUG ? `
+            <details style="margin-top: 12px; text-align: left;">
+              <summary style="cursor: pointer; font-size: 12px; color: #666;">Debug Info</summary>
+              <div style="margin-top: 8px; font-size: 11px; color: #888; font-family: monospace;">
+                Demo Mode: ${window.CONFIG.DEMO_MODE ? 'Yes' : 'No'}<br>
+                API Key Set: ${window.CONFIG.GOOGLE_MAPS_API_KEY !== 'YOUR_GOOGLE_MAPS_API_KEY_HERE' ? 'Yes' : 'No'}<br>
+                Google Object: ${typeof google !== 'undefined' ? 'Loaded' : 'Not Loaded'}
+              </div>
+            </details>
+          ` : ''}
         </div>
       </div>
     `;

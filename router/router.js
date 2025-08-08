@@ -29,21 +29,9 @@ function initRouterServices() {
   console.log('Router services initialized');
 }
 
-// Initialize router services when Google Maps is loaded
-function initializeWhenReady() {
-  if (typeof google !== 'undefined' && google.maps) {
-    initRouterServices();
-  } else {
-    // After waiting for a reasonable time, show fallback
-    setTimeout(() => {
-      if (typeof google === 'undefined') {
-        console.log('Google Maps API not available, using fallback mode');
-        displayMapFallback();
-      } else {
-        initializeWhenReady();
-      }
-    }, 1000);
-  }
+// Google Maps callback function
+function initMap() {
+  initRouterServices();
 }
 
 // Restore session data on load
@@ -71,8 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window._claimSessionTimes = savedTimes; // store globally for later
   
-  // Initialize Google Maps when ready
-  initializeWhenReady();
+  // Google Maps will be initialized via the callback=initMap parameter
 });
 
 function optimizeRoute() {
@@ -329,5 +316,11 @@ END:VCALENDAR`;
   return URL.createObjectURL(blob);
 }
 
-// Make sure optimizeRoute is globally accessible
+// Google Maps callback function
+function initMap() {
+  initRouterServices();
+}
+
+// Make sure functions are globally accessible
 window.optimizeRoute = optimizeRoute;
+window.initMap = initMap;
